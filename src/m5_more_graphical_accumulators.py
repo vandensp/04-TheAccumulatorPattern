@@ -132,7 +132,7 @@ def run_test_draw_circles_from_rectangle():
     print('--------------------------------------------------')
 
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement this TEST function.
+    # Done: 3. Implement this TEST function.
     #   It TESTS the  draw_circles_from_rectangle  function
     #   defined below.  Include at least **   3   ** tests, of which
     #      ***  at least TWO tests are on ONE window and
@@ -151,12 +151,15 @@ def run_test_draw_circles_from_rectangle():
 
     # Test 1:
     rectangle1 = rg.Rectangle(rg.Point(400, 250), rg.Point(440, 325))
+    rectangle1.fill_color = 'green'
     draw_circles_from_rectangle(4, 5, rectangle1, window1)
 
 
     # Test 2:
     rectangle2 = rg.Rectangle(rg.Point(500, 450), rg.Point(600, 400))
-    draw_circles_from_rectangle(3, 8, rectangle2, window1)
+    rectangle2.fill_color = 'blue'
+    rectangle2.outline_color = 'red'
+    draw_circles_from_rectangle(8, 3, rectangle2, window1)
     window1.close_on_mouse_click()
 
     title = 'Test 3 of Draw Circles from Rectangle '
@@ -165,7 +168,9 @@ def run_test_draw_circles_from_rectangle():
 
     # Test 3:
     rectangle3 = rg.Rectangle(rg.Point(350, 280), rg.Point(375, 330))
-    draw_squares_from_circle(6, 10, rectangle3, window2)
+    rectangle3.fill_color = 'yellow'
+    rectangle3.outline_color = 'red'
+    draw_circles_from_rectangle(6, 10, rectangle3, window2)
 
     window2.close_on_mouse_click()
 
@@ -225,14 +230,17 @@ def draw_circles_from_rectangle(m, n, rectangle, window):
     rectangle.attach_to(window)
     rectangle_center = rectangle.get_center()
 
-    filled_circle_radius = (rectangle.corner_2.y - rectangle.corner_1.y) / 2
+    filled_circle_radius = math.fabs(rectangle.corner_2.y - rectangle.corner_1.y) / 2
+
     for k in range (m):
-        filled_circle = rg.Circle(rg.Point(rectangle_center.x - (filled_circle_radius * 2 * (k + 1)), rectangle_center.y), filled_circle_radius)
+        filled_circle = rg.Circle(rg.Point((rectangle_center.x) - (filled_circle_radius * 2 * (k + 1)), rectangle_center.y), filled_circle_radius)
+        filled_circle.fill_color = rectangle.fill_color
         filled_circle.attach_to(window)
 
-    outline_circle_radius = (rectangle.corner_2.x - rectangle.corner_1.x) / 2
+    outline_circle_radius = math.fabs(rectangle.corner_2.x - rectangle.corner_1.x) / 2
     for k in range (n):
         outline_circle = rg.Circle(rg.Point(rectangle_center.x,  rectangle_center.y - (outline_circle_radius * 2 * (k + 1))), outline_circle_radius)
+        outline_circle.outline_color = rectangle.outline_color
         outline_circle.attach_to(window)
 
     window.render()
