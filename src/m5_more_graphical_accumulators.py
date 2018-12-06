@@ -31,7 +31,6 @@ def main():
     #run_test_draw_circles_from_rectangle()
     run_test_draw_lines_from_rectangles()
 
-
 def run_test_draw_squares_from_circle():
     """ Tests the   draw_squares_from_circle  function. """
     print()
@@ -362,7 +361,6 @@ def draw_lines_from_rectangles(rectangle1, rectangle2, n, window):
             line.attach_to(window)
 
     window.render()
-    window.close_on_mouse_click()
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
